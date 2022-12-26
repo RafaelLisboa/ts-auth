@@ -5,7 +5,7 @@ export default class RoleController {
 
   constructor() {}
 
-  public async createRole(req: Request, response: Response, next: NextFunction) {
+  async createRole(req: Request, response: Response, next: NextFunction) {
     try {
       response.send(await roleService.createRole(req.body.name)); 
     }
@@ -14,7 +14,7 @@ export default class RoleController {
     }
   }
 
-  public async listRoles(req: Request, response: Response, next: NextFunction) {
+  async listRoles(req: Request, response: Response, next: NextFunction) {
     try {
       return  response.send(await roleService.listRoles());
     }

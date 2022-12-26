@@ -20,7 +20,6 @@ const appDataSource = new DataSource({
         RoleType,
         `${__dirname}/../**/*.entity{.ts,.js}`
     ],
-
     migrations: [
         "./src/migrations"
     ]

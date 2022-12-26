@@ -3,9 +3,9 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn
 @Entity("roles")
 export default class Role {
   @PrimaryColumn()
-  public id?:string;
-  @Column({unique: true})
-  public name:string;
+  public id?: string;
+  @Column({ unique: true , length: 50})
+  public name: string;
   @CreateDateColumn()
-  public created_at?:Date;
+  public created_at?: Date;
 }

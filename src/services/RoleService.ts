@@ -3,33 +3,58 @@ import ServiceException from "../common/errors/ServiceExcepiton";
 import { ResponseStatusCode } from "../common/http/ResponseStatusCode";
 import { roleRepository } from "../repositories/RoleRepository";
 import Role from "../domain/Role";
+import { Errors } from "../common/errors/ErrorsEnum";
+import { randomUUID } from "crypto";
 
 class RoleService {
 
   constructor() { }
 
-  public async createRole(name:string): Promise<Role> {
-      console.log('Creating a new role with name ' + name);
-      const roleAlreadyExist: boolean = await roleRepository.findOneBy({
-        name: name
-      }) !== null;
+  async createRole(name: string): Promise<Role> {
+    console.log('Creating a new role with name ' + name);
 
-      if (roleAlreadyExist) {
-        throw new ServiceException(ResponseStatusCode.LOGIC_ERROR, "This role already existis");
-      }
+    if (name === "" || name.trim().length === 0) {
+      throw new ServiceException(ResponseStatusCode.LOGIC_ERROR, Errors.NAME_CANT_BE_EMPTY);
+    }
 
-      let newRole = roleRepository.create({
-        id: v4(),
-        name: name,
-      });
-      return await roleRepository.save(newRole);
+    const roleAlreadyExist: boolean = await roleRepository.findOneBy({
+      name: name
+    }) !== null;
+
+    if (roleAlreadyExist) {
+      throw new ServiceException(ResponseStatusCode.LOGIC_ERROR, Errors.ROLE_ALREADY_EXISTS);
+    }
+
+    let newRole = roleRepository.create({
+      id: v4(),
+      name: name,
+    });
+    return await roleRepository.save(newRole);
   }
 
-  public async listRoles(): Promise<Role[]> {
+  async listRoles(): Promise<Role[]> {
     console.log("Listing the saved roles");
     return await roleRepository.find();
   }
 
+
+  async getNewUserDefaultRole(): Promise<Role> {
+    let role = await roleRepository.findOneBy({
+      name: "New User"
+    });
+
+    if (role == null) {
+      role = await this.createUserDefaultRole();
+    }
+    return role;
+  }
+
+  private async createUserDefaultRole(): Promise<Role> {
+    return await roleRepository.save({
+      id: randomUUID(),
+      name: "New User"
+    });
+  }
 }
 
 export const roleService: RoleService = new RoleService();

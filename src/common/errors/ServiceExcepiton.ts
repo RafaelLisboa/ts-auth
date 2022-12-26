@@ -1,3 +1,4 @@
+import { Errors } from "./ErrorsEnum";
 import { TypeErros } from "./TypeErrorsEnum";
 
 export default class ServiceException  {
@@ -5,10 +6,10 @@ export default class ServiceException  {
   description:string;
   message:string
 
-  public constructor(statusCode:number = 400, message:string) {
+  public constructor(statusCode:number = 400, errorMessage:Errors) {
     this.statusCode = statusCode;
     this.description = TypeErros[statusCode];
-    this.message = message
+    this.message = errorMessage.toString();
   }
 
   
