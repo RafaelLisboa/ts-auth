@@ -1,6 +1,5 @@
 version: '3.8'
 services:
- 
 
  
  database:
@@ -9,10 +8,14 @@ services:
       - /var/lib/mysql
     restart: always
     environment:
-      MYSQL_DATABASE: auth
+      DB_HOST: database
       MYSQL_ROOT_PASSWORD: secret
     ports:
       - "3306:3306"
+    expose:
+      - "3306"
+    networks:
+      - mynet
 
  cache:
     image: redis:6.2-alpine
@@ -22,13 +25,31 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass secret
     volumes: 
       - cache:/data
+    networks:
+      - mynet
+
  app:
     build: .
     ports:
       - "3000:3000"
     depends_on:
-      - "database"
-      - "cache"
+      - database
+      - cache
+    environment:
+      DB_HOST: database
+      DB_USER: root
+      DB_PASSWORD: secret
+      DB_DATABASE: auth
+      DB_PORT: 3306
+      APP_PORT: 3000
+      JWT_SECRET: sei-la
+    networks:
+      - mynet
+
 volumes:
   cache:
     driver: local
+
+networks:
+  mynet:
+    driver: bridge

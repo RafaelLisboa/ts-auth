@@ -6,6 +6,8 @@ import RoleType from './domain/RoleType';
 
 const port = process.env.DB_PORT as unknown as number | undefined;
 
+console.log(process.env);
+
 const appDataSource = new DataSource({
     type: "mysql",
     host: process.env.DB_HOST,

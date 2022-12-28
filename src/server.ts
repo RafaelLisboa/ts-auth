@@ -6,6 +6,9 @@ import { errorMiddleware } from './middlewares/error';
 
 appDataSource.initialize()
   .then(() => {
+    console.log("Data source initialized!!")
+  })
+  .then(() => {
     const app = express();
     
     app.use(express.json());

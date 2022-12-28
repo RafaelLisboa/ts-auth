@@ -2,7 +2,7 @@ FROM node:latest
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY . /app/
 RUN npm run build
 EXPOSE 3000
 CMD ["npm","run", "dev"]

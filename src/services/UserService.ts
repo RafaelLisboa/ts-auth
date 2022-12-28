@@ -8,13 +8,8 @@ import { roleService } from "./RoleService";
 import bcrypt from 'bcrypt'
 
 class UserService {
-  private static REGEX = "/\\*.*?\\*/";
 
   async createUser(user: User) {
-    // Remove the special characters from the fields
-    user.documentNumber = user.documentNumber.replace(UserService.REGEX, "") ;
-    user.username = user.username.replace(UserService.REGEX, "");
-
     if (user.username === "" || user.username.length === 0) {
       throw new ServiceException(ResponseStatusCode.LOGIC_ERROR, Errors.NAME_CANT_BE_EMPTY);
     }
