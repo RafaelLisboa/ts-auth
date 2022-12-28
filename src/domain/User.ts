@@ -17,7 +17,7 @@ export default class User {
 		type: "simple-array",
 		nullable: true,
 	})
-	@Column({select: false})
+	@Column()
 	public password:string
 	public roleIds?: string[];
 	@CreateDateColumn()

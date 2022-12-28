@@ -52,6 +52,12 @@ class UserService {
     user.roleIds=[userDefaultRole.id!];
     return user;
   }
+
+  async getUserById(id:string) {
+    return await userRepository.findOneBy({
+      id: id
+    });
+  }
 }
 
 export const userService = new UserService();

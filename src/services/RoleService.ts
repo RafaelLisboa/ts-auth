@@ -37,8 +37,20 @@ class RoleService {
     return await roleRepository.find();
   }
 
-
   async getNewUserDefaultRole(): Promise<Role> {
+    let role = await roleRepository.findOneBy({
+      name: "New User"
+    });
+
+    if (role == null) {
+      throw new ServiceException(ResponseStatusCode.FATAL_ERROR, Errors.ERROR_TO_VERIFY_USER_ROLE);
+    }
+
+    return role;
+  }
+
+
+  async setNewUserDefaultRole(): Promise<Role> {
     let role = await roleRepository.findOneBy({
       name: "New User"
     });
