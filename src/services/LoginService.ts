@@ -1,11 +1,12 @@
-import { Errors } from "../common/errors/ErrorsEnum";
-import ServiceException from "../common/errors/ServiceExcepiton";
-import { ResponseStatusCode } from "../common/http/ResponseStatusCode";
-import User from "../domain/User";
-import { userRepository } from "../repositories/UserRepository";
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { roleService } from "./RoleService";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import { Errors } from '../common/errors/ErrorsEnum';
+import ServiceException from '../common/errors/ServiceExcepiton';
+import { ResponseStatusCode } from '../common/http/ResponseStatusCode';
+import User from '../domain/User';
+import { userRepository } from '../repositories/UserRepository';
+import { roleService } from './RoleService';
 
 export class LoginSerice {
     private static TOKEN_EXPIRES = 60 * 2;

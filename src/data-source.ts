@@ -1,8 +1,10 @@
-import 'dotenv/config'
-import { DataSource } from "typeorm"
-import User from './domain/User';
+import 'dotenv/config';
+
+import { DataSource } from 'typeorm';
+
 import Role from './domain/Role';
 import RoleType from './domain/RoleType';
+import User from './domain/User';
 
 const port = process.env.DB_PORT as unknown as number | undefined;
 

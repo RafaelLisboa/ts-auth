@@ -1,11 +1,12 @@
-import { randomUUID } from "crypto";
-import { Errors } from "../common/errors/ErrorsEnum";
-import ServiceException from "../common/errors/ServiceExcepiton";
-import { ResponseStatusCode } from "../common/http/ResponseStatusCode";
-import User from "../domain/User";
-import { userRepository } from "../repositories/UserRepository";
-import { roleService } from "./RoleService";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import { randomUUID } from 'crypto';
+
+import { Errors } from '../common/errors/ErrorsEnum';
+import ServiceException from '../common/errors/ServiceExcepiton';
+import { ResponseStatusCode } from '../common/http/ResponseStatusCode';
+import User from '../domain/User';
+import { userRepository } from '../repositories/UserRepository';
+import { roleService } from './RoleService';
 
 class UserService {
 
@@ -42,13 +43,13 @@ class UserService {
     });
   }
 
-  private async setDefaultRole(user:User) {
+  private async setDefaultRole(user: User) {
     const userDefaultRole = await roleService.setNewUserDefaultRole();
-    user.roleIds=[userDefaultRole.id!];
+    user.roleIds = [userDefaultRole.id!];
     return user;
   }
 
-  async getUserById(id:string) {
+  async getUserById(id: string) {
     return await userRepository.findOneBy({
       id: id
     });

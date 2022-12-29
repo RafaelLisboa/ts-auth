@@ -1,8 +1,9 @@
-import express, { ErrorRequestHandler, NextFunction, Request, Response, request, response } from 'express';
-import appDataSource from './data-source';
 import cors from 'cors';
-import router from './routes';
+import express from 'express';
+
+import appDataSource from './data-source';
 import { errorMiddleware } from './middlewares/error';
+import router from './routes';
 
 appDataSource.initialize()
   .then(() => {
@@ -10,16 +11,16 @@ appDataSource.initialize()
   })
   .then(() => {
     const app = express();
-    
+
     app.use(express.json());
     app.use(cors());
     app.use(router);
     app.use(errorMiddleware)
-    
+
     const server = app.listen(process.env.APP_PORT, () => {
       console.log('Server runnnig');
     })
-    
+
     process.on('SIGTERM', shutDown);
     process.on('SIGINT', shutDown);
 
@@ -36,4 +37,4 @@ appDataSource.initialize()
         process.exit(1);
       }, 10000);
     }
-});
+  });
