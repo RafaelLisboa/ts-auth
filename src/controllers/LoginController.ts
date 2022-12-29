@@ -9,7 +9,7 @@ export class LoginController {
         try {
             const userLogin:User = {
                 username: req.body.name,
-                documentNumber: req.body.documentNumber,
+                email: req.body.email,
                 password: req.body.password
             }
 

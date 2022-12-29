@@ -22,7 +22,7 @@ export class LoginSerice {
         console.log("The login is correct!");
 
         const registeredUser = await userRepository.findOneBy({
-            documentNumber: user.documentNumber
+            email: user.email
         });
 
         console.log("User gotten by database");
@@ -48,7 +48,7 @@ export class LoginSerice {
 
     private async userExists(user: User) {
         return await userRepository.findOneBy({
-            documentNumber: user.documentNumber
+            email: user.email
         }) === null;
     }
 
@@ -58,7 +58,7 @@ export class LoginSerice {
                 password: true
             },
             where: {
-                documentNumber: user.documentNumber,
+                email: user.email,
                 id: user.id
             }
         }).then(user => {

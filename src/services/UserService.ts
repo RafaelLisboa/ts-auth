@@ -16,11 +16,11 @@ class UserService {
 
     console.log("Verifying weather this user existis -> " + JSON.stringify(user));
 
-    const userDocumentNumberAlreadyExists = await userRepository.findOneBy({
-      documentNumber: user.documentNumber
+    const useremailAlreadyExists = await userRepository.findOneBy({
+      email: user.email
     }) != null;
 
-    if (userDocumentNumberAlreadyExists) {
+    if (useremailAlreadyExists) {
       throw new ServiceException(ResponseStatusCode.LOGIC_ERROR, Errors.USER_ALREADY_EXISTS);
     }
 
@@ -43,7 +43,7 @@ class UserService {
   }
 
   private async setDefaultRole(user:User) {
-    const userDefaultRole = await roleService.getNewUserDefaultRole();
+    const userDefaultRole = await roleService.setNewUserDefaultRole();
     user.roleIds=[userDefaultRole.id!];
     return user;
   }

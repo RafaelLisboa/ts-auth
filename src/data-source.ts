@@ -6,7 +6,6 @@ import RoleType from './domain/RoleType';
 
 const port = process.env.DB_PORT as unknown as number | undefined;
 
-console.log(process.env);
 
 const appDataSource = new DataSource({
     type: "mysql",
@@ -20,7 +19,6 @@ const appDataSource = new DataSource({
         User,
         Role,
         RoleType,
-        `${__dirname}/../**/*.entity{.ts,.js}`
     ],
     migrations: [
         "./src/migrations"

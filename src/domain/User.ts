@@ -12,7 +12,7 @@ export default class User {
 	@Column({
 		nullable: false
 	})
-	public documentNumber: string;
+	public email: string;
 	@Column({
 		type: "simple-array",
 		nullable: true,
