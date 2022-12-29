@@ -29,6 +29,7 @@ function verifyTokenOrThrowUnathorizedError(token:string) {
     try {
         verify(token, process.env.JWT_SECRET ?? 'null');
     }
+    
     catch(error) {
         throw new ServiceException(ResponseStatusCode.UNATHORIZED, Errors.UNATHORIZED_USER);
     }
