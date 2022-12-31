@@ -20,4 +20,15 @@ export class LoginController {
             next(error);
         }
     }
+
+    async refreshToken(req: Request, resp: Response, next: NextFunction) {
+        try {
+            const oldToken:string = req.body.oldToken;
+
+            return resp.send(await loginSerice.refreshToken(oldToken))
+        }
+        catch(error) {
+
+        }
+    }
 }

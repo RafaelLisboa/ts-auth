@@ -1,9 +1,8 @@
 import 'dotenv/config';
 
 import { DataSource } from 'typeorm';
+import { Token } from './domain/Token';
 
-import Role from './domain/Role';
-import RoleType from './domain/RoleType';
 import User from './domain/User';
 
 const port = process.env.DB_PORT as unknown as number | undefined;
@@ -19,8 +18,7 @@ const appDataSource = new DataSource({
     synchronize: true,
     entities: [
         User,
-        Role,
-        RoleType,
+        Token
     ],
     migrations: [
         "./src/migrations"

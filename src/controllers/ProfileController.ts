@@ -8,6 +8,7 @@ import { profileService } from '../services/ProfileService';
 export class ProfileController {
 
     async getProfile(req: Request, res: Response, next: NextFunction) {
+
         try {
             const token = req.headers.authorization;
             if (token === null || token === undefined) {

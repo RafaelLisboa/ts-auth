@@ -5,5 +5,6 @@ export enum TypeErros {
   LOGIC = ResponseStatusCode.LOGIC_ERROR,
   FATAL = ResponseStatusCode.FATAL_ERROR,
   INTEGRATION = ResponseStatusCode.FATAL_ERROR,
-  OK = ResponseStatusCode.OK
+  OK = ResponseStatusCode.OK,
+  UNATHORIZED = ResponseStatusCode.UNATHORIZED
 }

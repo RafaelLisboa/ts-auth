@@ -18,7 +18,6 @@ export default class User {
 	})
 	@Column()
 	public password: string
-	public roleIds?: string[];
 	@CreateDateColumn()
 	public created_at?: Date;
 	@UpdateDateColumn()
