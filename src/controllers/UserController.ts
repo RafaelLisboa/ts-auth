@@ -24,7 +24,6 @@ export class UserController {
 
 	async listUsers(req: Request, resp: Response, next: NextFunction) {
 		try {
-			console.log("Listing users");
 
 			return resp.send(await userService.listUsers());
 		}

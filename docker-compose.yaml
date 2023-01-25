@@ -42,7 +42,7 @@ services:
       DB_DATABASE: auth
       DB_PORT: 3306
       APP_PORT: 3000
-      JWT_SECRET: sei-la
+      JWT_SECRET: m447730ae-e103-4fe6-8018
     networks:
       - mynet
 

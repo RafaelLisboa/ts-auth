@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { RefreshToken } from "./RefreshToken";
 
 
 @Entity("tokens")
@@ -13,6 +14,7 @@ export class Token {
     @Column()
     public userId:string;
 
-    @UpdateDateColumn()
-    public updatedAt:Date;
+    @Column({type: "json"})
+    public refreshToken:RefreshToken;
+
 }

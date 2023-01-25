@@ -1,4 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+import { Errors } from '../common/errors/ErrorsEnum';
+import ServiceException from '../common/errors/ServiceExcepiton';
+import { ResponseStatusCode } from '../common/http/ResponseStatusCode';
 
 import User from '../domain/User';
 import { loginSerice } from '../services/LoginService';
@@ -23,9 +26,12 @@ export class LoginController {
 
     async refreshToken(req: Request, resp: Response, next: NextFunction) {
         try {
-            const oldToken:string = req.body.oldToken;
-
-            return resp.send(await loginSerice.refreshToken(oldToken))
+            const refreshToken = req.headers.authorization;
+            if (refreshToken === null || refreshToken === undefined) {
+                throw new ServiceException(ResponseStatusCode.UNATHORIZED, Errors.UNATHORIZED_USER);
+            }
+            
+            resp.send(await loginSerice.refreshToken(refreshToken));
         }
         catch(error) {
 

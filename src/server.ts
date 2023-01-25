@@ -7,9 +7,6 @@ import router from './routes';
 
 appDataSource.initialize()
   .then(() => {
-    console.log("Data source initialized!!")
-  })
-  .then(() => {
     const app = express();
 
     app.use(express.json());
